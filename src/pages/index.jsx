@@ -3,6 +3,7 @@ import { useState } from "react";
 import StepThree from "@/component/StepThree";
 import StepOne from "@/component/StepOne";
 import StepTwo from "@/component/StepTwo";
+import StepFour from "@/component/StepFour";
 
 export default function RegisterForm() {
   const [step, setStep] = useState(1);
@@ -23,7 +24,15 @@ export default function RegisterForm() {
         />
       )}
 
-      {step === 3 && <StepThree back={() => setStep(2)} update={updateData} />}
+      {step === 3 && (
+        <StepThree
+          next={() => setStep(4)}
+          back={() => setStep(2)}
+          update={updateData}
+        />
+      )}
+
+      {step === 4 && <StepFour update={updateData} />}
     </div>
   );
 }
