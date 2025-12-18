@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+
 export default function StepTwo({ next, back, update }) {
   const handleChange = (e) => update({ [e.target.name]: e.target.value });
 
@@ -32,7 +33,7 @@ export default function StepTwo({ next, back, update }) {
           <input
             className="p-2 border rounded opacity-40 w-90"
             name="email"
-            placeholder="Email"
+            placeholder="email"
             onChange={handleChange}
           />
         </div>
@@ -43,8 +44,8 @@ export default function StepTwo({ next, back, update }) {
           </div>
           <input
             className="p-2 border rounded opacity-40 w-90"
-            name="phone"
-            placeholder="Phone number"
+            name="phoneNumber"
+            placeholder="PhoneNumber"
             onChange={handleChange}
           />
         </div>
@@ -71,17 +72,23 @@ export default function StepTwo({ next, back, update }) {
             className="p-2 border rounded opacity-40 w-90"
             type="password"
             name="confirmPassword"
-            placeholder="Confirm password"
+            placeholder="ConfirmPassword"
             onChange={handleChange}
           />
         </div>
         <div className="flex justify-between gap-2 mt-10 ">
-          <div className="flex justify-between border flex items-center justify-center rounded h-10 w-40">
+          <motion.div
+            className="flex justify-between border flex items-center justify-center rounded h-10 w-40"
+            whileHover={{ scale: 1.05 }}
+          >
             <button onClick={back}>← Back</button>
-          </div>
-          <div className="flex justify-between bg-black text-amber-50 flex justify-center rounded h-10 w-60">
+          </motion.div>
+          <motion.div
+            className="flex justify-between bg-black text-amber-50 flex justify-center rounded h-10 w-60"
+            whileHover={{ scale: 1.05 }}
+          >
             <button onClick={next}>Continue 2/3 →</button>
-          </div>
+          </motion.div>
         </div>
       </motion.div>
     </motion.div>

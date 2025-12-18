@@ -4,11 +4,14 @@ import StepThree from "@/component/StepThree";
 import StepOne from "@/component/StepOne";
 import StepTwo from "@/component/StepTwo";
 import StepFour from "@/component/StepFour";
+import { init } from "next/dist/compiled/webpack/webpack";
 
 export default function RegisterForm() {
-  const [step, setStep] = useState(1);
-
   const [data, setData] = useState({});
+
+  const [step, setstep] = useState(0);
+  const [fromvalues, setfromvalues] = useState({ initialvalues });
+  const [fromerrors, setfromerrors] = useState({ initialerrors });
 
   const updateData = (values) => setData((prev) => ({ ...prev, ...values }));
 

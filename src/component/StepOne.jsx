@@ -1,7 +1,21 @@
+import { validateStepOne } from "@/utils/Validators";
 import { motion } from "framer-motion";
 
-export default function StepOne({ next, update }) {
-  const handleChange = (e) => update({ [e.target.name]: e.target.value });
+export default function StepOne({
+  next,
+  update,
+  fromvalues,
+  fromerrors,
+  setfromvalues,
+  setfromerrors,
+}) {
+  const handleChange = () => {
+    const { isValid, errors } = validateStepOne(fromvalues);
+    setfromerrors(errors);
+    if (isValid) {
+      next();
+    }
+  };
 
   return (
     <motion.div
@@ -32,7 +46,7 @@ export default function StepOne({ next, update }) {
           <input
             className="p-2 border rounded opacity-40 w-90"
             name="firstName"
-            placeholder="First name"
+            placeholder="firstName"
             onChange={handleChange}
           />
         </div>
@@ -45,7 +59,7 @@ export default function StepOne({ next, update }) {
           <input
             className="p-2 border rounded opacity-40 w-90"
             name="lastName"
-            placeholder="Last name"
+            placeholder="LastName"
             onChange={handleChange}
           />
         </div>
@@ -58,7 +72,7 @@ export default function StepOne({ next, update }) {
           <input
             className="p-2 border rounded opacity-40 w-90"
             name="username"
-            placeholder="Username"
+            placeholder="username"
             onChange={handleChange}
           />
         </div>
