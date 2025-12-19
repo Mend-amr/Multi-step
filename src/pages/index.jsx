@@ -1,41 +1,38 @@
 import { useState } from "react";
-
-import StepThree from "@/component/StepThree";
-import StepOne from "@/component/StepOne";
-import StepTwo from "@/component/StepTwo";
-import StepFour from "@/component/StepFour";
-import { init } from "next/dist/compiled/webpack/webpack";
-
-export default function RegisterForm() {
-  const [data, setData] = useState({});
-
-  const [step, setstep] = useState(0);
-  const [fromvalues, setfromvalues] = useState({ initialvalues });
-  const [fromerrors, setfromerrors] = useState({ initialerrors });
-
-  const updateData = (values) => setData((prev) => ({ ...prev, ...values }));
-
+import { AnimatePresence } from "framer-motion";
+import { ContactInfo, PrivateInfo } from "../component";
+import { initialvalues } from "@/constants/initail";
+const Home = () => {
+  const [step, setStep] = useState(0);
+  const [formValues, setformValues] = useState(initialvalues);
+  const [formErrors, setformErrors] = useState({ initialvalues });
+  const handleclick = () => {
+    setStep((prev) => prev + 1);
+  };
+  const handleprev = () => {
+    setStep((prev) => prev - 1);
+  };
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setformValues((previous) => ({ ...previous, [name]: "" }));
+    setformValues((previous) => ({ ...previous, [name]: value }));
+  };
+  const Container = [ContactInfo, PrivateInfo, profileImage, Success][step];
   return (
-    <div>
-      {step === 1 && <StepOne next={() => setStep(2)} update={updateData} />}
+    <AnimatePresence mode="wait">
+      <Container
+        handlechange={handleChange}
+        formValues={formValues}
+        formErrors={formErrors}
+        setformErrors={setformErrors}
+        setformValues={setformValues}
+        handleclick={handleclick}
+      />
 
-      {step === 2 && (
-        <StepTwo
-          next={() => setStep(3)}
-          back={() => setStep(1)}
-          update={updateData}
-        />
-      )}
-
-      {step === 3 && (
-        <StepThree
-          next={() => setStep(4)}
-          back={() => setStep(2)}
-          update={updateData}
-        />
-      )}
-
-      {step === 4 && <StepFour update={updateData} />}
-    </div>
+      <button onClick={handleprev}>previous</button>
+      <button onClick={handleclick}>Continue</button>
+    </AnimatePresence>
   );
-}
+};
+
+export default Home;

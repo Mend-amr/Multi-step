@@ -1,44 +1,26 @@
-// export default function ContactInfo({ update }) {
-//   const [contactInfo, setContactInfo] = useState({
-//     address: "",
-//     city: "",
-//     country: "",
-//   });
+import { motion } from "framer-motion";
 
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setContactInfo((prev) => ({ ...prev, [name]: value }));
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     update({ contactInfo });
-//   };
-
-//   return (
-//     <form onSubmit={handleSubmit}>
-//       <input
-//         type="text"
-//         name="address"
-//         placeholder="Хаяг"
-//         value={contactInfo.address}
-//         onChange={handleChange}
-//       />
-//       <input
-//         type="text"
-//         name="city"
-//         placeholder="Хот"
-//         value={contactInfo.city}
-//         onChange={handleChange}
-//       />
-//       <input
-//         type="text"
-//         name="country"
-//         placeholder="Улс"
-//         value={contactInfo.country}
-//         onChange={handleChange}
-//       />
-//       <button type="submit">Дараагийн алхам</button>
-//     </form>
-//   );
-// }
+export const ContactInfo = ({
+  handlechange,
+  formValues,
+  formErrors,
+  setformErrors,
+  setformValues,
+}) => {
+  const handleSubmit = () => {};
+  return (
+    <motion.div
+      initial="enter"
+      animate="active"
+      exit="exit"
+      transition={{ duration: 0.5 }}
+      style={{ backgroundColor: "red", width: 300 }}
+    >
+      <input type="text" name="email" onChange={handlechange} />
+      <input type="" name="phoneNumber" onChange={handlechange} />
+      <input type="password" name="password" onChange={handlechange} />
+      <input type="password" name="confirmPassword" onChange={handlechange} />
+      <button onclick={handleSubmit}></button>
+    </motion.div>
+  );
+};
