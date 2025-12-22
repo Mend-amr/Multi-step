@@ -1,7 +1,12 @@
 import { useState } from "react";
-import { AnimatePresence } from "framer-motion";
-import { ContactInfo, PrivateInfo } from "../component";
-import { initialvalues } from "@/constants/initail";
+import { ContactInfo } from "@/component/constants/Steps/ContactInfo";
+import { PrivateInfo } from "@/component/constants/Steps/PrivateInfo";
+import { initialvalues } from "@/component/constants/initail";
+import { ProfileImage } from "@/component/constants/Steps/ProfileImage";
+import { Success } from "@/component/constants/Steps/Success";
+import { Header } from "@/component/ui/Header";
+import { Input } from "@/component/ui/Input";
+
 const Home = () => {
   const [step, setStep] = useState(0);
   const [formValues, setformValues] = useState(initialvalues);
@@ -17,21 +22,34 @@ const Home = () => {
     setformValues((previous) => ({ ...previous, [name]: "" }));
     setformValues((previous) => ({ ...previous, [name]: value }));
   };
-  const Container = [ContactInfo, PrivateInfo, profileImage, Success][step];
+  const Container = [ContactInfo, PrivateInfo, ProfileImage, Success][step];
   return (
-    <AnimatePresence mode="wait">
-      <Container
-        handlechange={handleChange}
-        formValues={formValues}
-        formErrors={formErrors}
-        setformErrors={setformErrors}
-        setformValues={setformValues}
-        handleclick={handleclick}
-      />
-
-      <button onClick={handleprev}>previous</button>
-      <button onClick={handleclick}>Continue</button>
-    </AnimatePresence>
+    <div className="flex  items-center justify-center min-h-screen ">
+      <div className="  h-130 w-90    rounded-lg shadow-lg">
+        <Container
+          handlechange={handleChange}
+          formValues={formValues}
+          formErrors={formErrors}
+          setformErrors={setformErrors}
+          setformValues={setformValues}
+          handleclick={handleclick}
+        />
+        <div className="flex justify-center mt-75">
+          <button
+            className="bg-black text-white rounded w-30 h-10 m-2"
+            onClick={handleprev}
+          >
+            Back
+          </button>
+          <button
+            className="bg-black text-white rounded w-50 h-10 m-2"
+            onClick={handleclick}
+          >
+            Continue
+          </button>
+        </div>
+      </div>
+    </div>
   );
 };
 
